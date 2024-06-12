@@ -5,16 +5,17 @@ public class Employee
     private List<float> grades = new List<float>();
     public string Name { get; private set; }
     public string Surname { get; private set; }
-    /* public int age { get; private set; }
     public string login { get; private set; }
-    public string password { get; private set; } */
-    public Employee(string name, string surname)
+    public int age { get; private set; }
+
+    public string password { get; private set; }
+    public Employee(string login, string name, string surname, int age, string password)
     {
-       // this.login = login;
+        this.login = login;
         this.Name = name;
         this.Surname = surname;
-       // this.age = age;
-       // this.password = password;
+        this.age = age;
+        this.password = password;
     }
     public float Result
     {
@@ -36,9 +37,10 @@ public class Employee
 
         foreach (var grade in this.grades)
         {
-            statistics.Max = Math.Max(statistics.Max, grade); //cyt:"To jest taki myk, który czésto sié wykorzystuje"
+            statistics.Max = Math.Max(statistics.Max, grade); //cyt:"To jest taki myk, który czésto sié wykorzystuje" :)
             statistics.Min = Math.Min(statistics.Min, grade);
             statistics.Average += grade;
+
         }
         statistics.Average /= this.grades.Count;
         return statistics;
@@ -48,17 +50,8 @@ public class Employee
     {
         int maxValue = -1;
         Employee maxValueEmployee = null;
-        var employee = new Employee("Jacek", "Hetman");
-        employee.AddGrade(2);
-        employee.AddGrade(2);
-        employee.AddGrade(6);
-        employee.AddGrade(1);
-        employee.AddGrade(2);
-        employee.AddGrade(5);
-        employee.AddGrade(6);
-        employee.AddGrade(7);
-        employee.AddGrade(1);
-        employee.AddGrade(7);
+        var employee = new Employee("jackski", "Jacek", "Hetman", 64, "pS464");
+        var employee2 = new Employee("mayusheck", "Maya", "Hetmanska", 5, "pS464");
         employee.AddGrade(7);
         employee.AddGrade(4);
         employee.AddGrade(5);
@@ -68,26 +61,13 @@ public class Employee
         employee.AddGrade(3);
         employee.AddGrade(9);
         var statistics = employee.GetStatistics();
-        Console.WriteLine($"Average: {statistics.Average:N2}  "); // tutaj $(dolar) oznacza interpolacje czyli wrzutké  - N2 oznacza 2 miejsca po przecinku
-        Console.WriteLine($"Min: {statistics.Min}  ");
-        Console.WriteLine($"Max: {statistics.Max}  ");
-        
-        /*
-        List<Employee> listofEmployees = new List<Employee>()
-    {
-    employee
-    };
-
-        foreach (var employee in listofEmployees)
+        Console.WriteLine($"Pracownik:\t {employee.Name} {employee.Surname}");
+        Console.WriteLine($"Grades Average:\t {statistics.Average:N2}");  // tutaj $(dolar) oznacza interpolacje czyli wrzutké
+        Console.WriteLine($"Lowest grade:\t {statistics.Min:N2}");       // N2 oznacza 2 miejsca po przecinku
+        Console.WriteLine($"Highest grade:\t {statistics.Max:N2}");
+        void SetSth(ref Statistics statistics)
         {
-            if (employee.Result > maxValue)
-            {
-                maxValue = employee.Result;
-                maxValueEmployee = employee;
-            }
+            statistics = new Statistics();
         }
-        Console.WriteLine("Najlepszy pracownik");
-        Console.WriteLine("Imie: " + maxValueEmployee.name);
-        Console.WriteLine("Nazwisko: " + maxValueEmployee.surname);*/
     }
 }
